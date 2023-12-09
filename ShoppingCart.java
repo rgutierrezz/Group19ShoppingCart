@@ -15,11 +15,12 @@ public class ShoppingCart {
     public ShoppingCart() {
         // Empty constructor
     }
-     public void showAllProducts() {
+  
+    public void showAllProducts(Product products[]) {
         System.out.println("Shopping Cart Contents:");
         System.out.printf("%-5s %-15s %-10s %-8s\n", "ID", "Name", "Price", "Quantity");
 
-        for (Product p : items) {
+        for (Product p : products) {
             System.out.printf("%-5d %-15s %-10.2f %-8d\n", p.getId(), p.getName(), p.getPrice(), p.getQuantity());
         }
         System.out.println();
@@ -68,16 +69,6 @@ public class ShoppingCart {
         System.out.println();
     }
 
-    public void showAllProducts(Product[] products) {
-        System.out.println("Shopping Cart Contents:");
-        System.out.printf("%-5s %-15s %-10s %-8s\n", "ID", "Name", "Price", "Quantity");
-
-        for (Product p : items) {
-            System.out.printf("%-5d %-15s %-10.2f %-8d\n", p.getId(), p.getName(), p.getPrice(), p.getQuantity());
-        }
-        System.out.println();
-    }
-
     public void totalPrice(Product[] products) {
         double total = 0;
         for (Product item : items) {
@@ -95,4 +86,3 @@ public class ShoppingCart {
         System.out.println("Order confirmed. Thank you for shopping!");
     }
 }
-
