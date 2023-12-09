@@ -1,5 +1,4 @@
 package com.mycompany.shoppingcart;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +19,13 @@ public class ShoppingCartUI extends JFrame {
         JButton deleteFromCartButton = new JButton("Delete from Cart");
         JButton editCartButton = new JButton("Edit Cart");
         JButton showTotalButton = new JButton("Show Total");
+        
+         showProductsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                shoppingCart.showAllProducts();
+            }
+        });
 
         showProductsButton.addActionListener(new ActionListener() {
             @Override
@@ -55,7 +61,7 @@ public class ShoppingCartUI extends JFrame {
         showTotalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add logic for showing total
+                shoppingCart.totalPrice(products);
             }
         });
 
@@ -72,7 +78,6 @@ public class ShoppingCartUI extends JFrame {
         setVisible(true);
     }
 
-    // Helper method to find a product by ID
     private Product findProductById(int id, Product[] products) {
         for (Product product : products) {
             if (product.getId() == id) {
