@@ -3,51 +3,45 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.shoppingcart;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Scanner;
 import javax.swing.SwingUtilities;
 
-import java.util.*;
-/**
- *
- * @author Valente Lowery
- */
-
 public class Main {
-    // To show the products available in the store
     public static void main(String args[]) {
-    // Scanner class is used to take the input from the user (or console)
-    Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-    // To store the product details
-    Product products[] = new Product[5];
-    // Adding the product details
-    products[0] = new Product(101, "Juice", 102.50, 5);
-    products[1] = new Product(102, "Chocolates", 402.50, 14);
-    products[2] = new Product(103, "Shop", 42.80, 8);
-    products[3] = new Product(104, "Biscuits", 10.00, 55);
-    products[4] = new Product(105, "Candy", 12.20, 102);
+        Product products[] = new Product[5];
+        products[0] = new Product(101, "Juice", 102.50, 5);
+        products[1] = new Product(102, "Chocolates", 402.50, 14);
+        products[2] = new Product(103, "Shop", 42.80, 8);
+        products[3] = new Product(104, "Biscuits", 10.00, 55);
+        products[4] = new Product(105, "Candy", 12.20, 102);
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new ShoppingCartUI(products);
+            }
+        });
     
-     SwingUtilities.invokeLater(() -> new ShoppingCartUI(products));
+        System.out.println("Enter your username to login");
+        String username = scan.nextLine();
+        System.out.println("Enter your password to login");
+        String password = scan.nextLine();
 
-    // Authentication of the customer
-    System.out.println("Enter your username to login");
-    String username = scan.nextLine();
-    System.out.println("Enter your password to login");
-    String password = scan.nextLine();
+        while (!username.equals("User") || !password.equals("1234")) {
+            System.out.println("Invalid credentials. Enter your username and password to login");
+            System.out.print("Enter your username: ");
+            username = scan.nextLine();
+            System.out.print("Enter your password: ");
+            password = scan.nextLine();
+        }
 
-    // While the customer does not enter the correct id and password, the system will not be accessible
-    while (!username.equals("User") || !password.equals("1234")) {
-        System.out.println("Invalid credentials. Enter your username and password to login");
-        System.out.print("Enter your username: ");
-        username = scan.nextLine();
-        System.out.print("Enter your password: ");
-        password = scan.nextLine();
-    }
-
-    // To store the items that the customer wants to buy
-      HashMap<Integer, Integer> cart = new HashMap<>();
-        ShoppingCart shoppingCart = new ShoppingCart(); // Create an instance of ShoppingCart
+        HashMap<Integer, Integer> cart = new HashMap<>();
+        ShoppingCart shoppingCart = new ShoppingCart();
         int choice;
 
         do {
@@ -59,11 +53,11 @@ public class Main {
             System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             choice = scan.nextInt();
-            scan.nextLine(); // To read the data from the next line from the console
+            scan.nextLine();
 
             switch (choice) {
                 case 1:
-                    shoppingCart.showAllProducts(products);
+                    shoppingCart.showAllProducts();  // Updated method call
                     break;
                 case 2:
                     System.out.print("Enter the product id : ");
@@ -72,13 +66,14 @@ public class Main {
                     System.out.print("Enter the quantity needed : ");
                     int addProductQuantity = scan.nextInt();
                     scan.nextLine();
-                    shoppingCart.addProduct(products, cart, addProductId, addProductQuantity);
+                    Product productToAdd = findProductById(addProductId, products);
+                    shoppingCart.addProduct(productToAdd, addProductQuantity);
                     break;
                 case 3:
                     System.out.print("Enter the product id to delete: ");
                     int deleteProductId = scan.nextInt();
                     scan.nextLine();
-                    shoppingCart.removeProduct(cart, deleteProductId);;
+                    shoppingCart.removeProduct(deleteProductId, products);
                     break;
                 case 4:
                     System.out.print("Enter the product id : ");
@@ -87,10 +82,10 @@ public class Main {
                     System.out.print("Enter the new quantity needed : ");
                     int editProductQuantity = scan.nextInt();
                     scan.nextLine();
-                    shoppingCart.editProduct(products, cart, editProductId, editProductQuantity);
+                    shoppingCart.editProduct(editProductId, editProductQuantity);
                     break;
                 case 5:
-                    shoppingCart.totalPrice(products, cart);
+                    shoppingCart.totalPrice(products);
                     break;
                 case 6:
                     shoppingCart.confirmOrder();
@@ -101,4 +96,15 @@ public class Main {
             }
         } while (choice != 6);
     }
+
+    private static Product findProductById(int id, Product[] products) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
+    }
 }
+   
+   
