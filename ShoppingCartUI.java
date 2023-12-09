@@ -20,19 +20,12 @@ public class ShoppingCartUI extends JFrame {
         JButton editCartButton = new JButton("Edit Cart");
         JButton showTotalButton = new JButton("Show Total");
         
-         showProductsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                shoppingCart.showAllProducts();
-            }
-        });
-
         showProductsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                shoppingCart.showAllProducts(products);
-            }
-        });
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        shoppingCart.showAllProducts(products);
+    }
+});
 
         addToCartButton.addActionListener(new ActionListener() {
             @Override
