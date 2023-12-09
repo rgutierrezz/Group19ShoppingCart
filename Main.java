@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.shoppingcart;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Scanner;
 import javax.swing.SwingUtilities;
@@ -57,7 +55,7 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    shoppingCart.showAllProducts();  // Updated method call
+                    shoppingCart.showAllProducts(products);  // Updated method call
                     break;
                 case 2:
                     System.out.print("Enter the product id : ");
@@ -107,4 +105,5 @@ public class Main {
     }
 }
    
+     
    
