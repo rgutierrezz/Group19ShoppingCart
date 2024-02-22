@@ -1,4 +1,4 @@
-# Group19ShoppingCart
+# ShopChecker
 Object Oriented Design and Proj- by Rafael Gutierrez, John Garofalo, Valente Lowery, Tivvon Cruickshank
 
 ### How to run the program:
